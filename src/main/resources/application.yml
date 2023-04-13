@@ -1,0 +1,9 @@
+db:
+  username: ${username.value:postgres}
+  password: pass
+  driver: PostgresDriver
+  url: postgres:5432
+  hosts: 127.0.0.1
+  pool:
+    size: 12
+    timeout: 10
