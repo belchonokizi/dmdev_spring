@@ -1,5 +1,6 @@
 package com.dmdev.spring.integration.annotation;
 
+import com.dmdev.spring.integration.TestApplicationRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
@@ -11,7 +12,7 @@ import java.lang.annotation.Target;
 //создаем аннотацию, чтобы не дублировать все аннотации в IT
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@SpringBootTest
+@SpringBootTest(classes = TestApplicationRunner.class)
 @ActiveProfiles("test")
 public @interface IT {
 }
