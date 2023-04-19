@@ -8,6 +8,7 @@ import com.dmdev.spring.listener.entity.EntityEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -19,6 +20,8 @@ public class CompanyService {
     private final CrudRepository<Integer, Company> repository;
     //для отправки ивентов
     private final ApplicationEventPublisher eventPublisher;
+
+    @Transactional
 
     public Optional<CompanyReadDto> findById(Integer id) {
         return repository.findById(id)
