@@ -12,11 +12,12 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.context.ApplicationEventPublisher;
 
+import java.util.Collections;
 import java.util.Optional;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 
@@ -36,7 +37,7 @@ class CompanyServiceTest {
     @Test
     void findById() {
         Mockito.when(repository.findById(COMPANY_ID))
-                .thenReturn(Optional.of(new Company(COMPANY_ID)));
+                .thenReturn(Optional.of(new Company(COMPANY_ID, null, Collections.emptyMap())));
 
         Optional<CompanyReadDto> actualResult = companyService.findById(COMPANY_ID);
 
