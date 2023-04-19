@@ -9,6 +9,11 @@ import javax.persistence.*;
 import java.util.HashMap;
 import java.util.Map;
 
+//важно делать одинаковые наименования параметров метода и запроса
+@NamedQuery(
+        name = "Company.findByCompanyName",
+        query = "select c from Company c where lower(c.companyName) = lower(:companyName)"
+)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
