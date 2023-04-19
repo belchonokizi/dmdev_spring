@@ -1,13 +1,18 @@
 package com.dmdev.spring.database.repository;
 
 import com.dmdev.spring.database.entity.Company;
-import org.springframework.data.repository.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
 import java.util.Optional;
 
-public interface CompanyRepository extends Repository<Company, Integer> {
+public interface CompanyRepository extends JpaRepository<Company, Integer> {
 
-    Optional<Company> findById(Integer id);
+    //использование PartTreeJpaQuery
+    //тут как критерий запроса используется поле сущности
+    Optional<Company> findByCompanyName(String companyName);
 
-    void delete(Company entity);
+    //Containing - like с двух сторон
+    //IgnoreCase - upper функция в sql
+    List<Company> findAllByCompanyNameContainingIgnoreCase(String fragment);
 }

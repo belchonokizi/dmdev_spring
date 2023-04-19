@@ -22,6 +22,14 @@ class CompanyRepositoryTest {
     private static final Integer APPLE_ID = 5;
     private final EntityManager entityManager;
     private final CompanyRepository companyRepository;
+
+    @Test
+    void checkFindByQueries() {
+        companyRepository.findByCompanyName("Google");
+        companyRepository.findAllByCompanyNameContainingIgnoreCase("a");
+
+    }
+
     @Test
     void delete() {
         Optional<Company> maybeCompany = companyRepository.findById(APPLE_ID);
