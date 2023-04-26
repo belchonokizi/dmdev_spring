@@ -2,12 +2,12 @@ package com.dmdev.spring.database.repository;
 
 import com.dmdev.spring.database.entity.Role;
 import com.dmdev.spring.database.entity.User;
+import com.dmdev.spring.dto.PersonalInfo2;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.*;
 
-import javax.persistence.LockModeType;
 import javax.persistence.QueryHint;
 import java.time.LocalDate;
 import java.util.List;
@@ -34,4 +34,15 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query(value = "select u from User u",
             countQuery = "select count(distinct u.firstname) from User u")
     Page<User> findAllBy(Pageable pageable);
+
+//    Если работаем в проекциями-классами можно использовать дженерики
+//    <T> List<T> findAllByCompanyId(Integer companyId, Class<T> clazz);
+
+    @Query(value = "SELECT firstname, " +
+            "lastname," +
+            "birth_date birthDate " +
+            "FROM users " +
+            "WHERE company_id = :companyId",
+    nativeQuery = true)
+    List<PersonalInfo2> findAllByCompanyId(Integer companyId);
 }
