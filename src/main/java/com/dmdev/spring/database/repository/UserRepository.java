@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.*;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.history.RevisionRepository;
 
 import javax.persistence.QueryHint;
@@ -16,7 +17,8 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long>,
         FilterUserRepository,
-        RevisionRepository<User, Long, Integer> {
+        RevisionRepository<User, Long, Integer>,
+        QuerydslPredicateExecutor<User> {
 
     @Query("select u from User u " +
             "where u.firstname like %:firstname% and u.lastname like %:lastname%")
@@ -40,7 +42,6 @@ public interface UserRepository extends JpaRepository<User, Long>,
 
 //    Если работаем в проекциями-классами можно использовать дженерики
 //    <T> List<T> findAllByCompanyId(Integer companyId, Class<T> clazz);
-
     @Query(value = "SELECT firstname, " +
             "lastname," +
             "birth_date birthDate " +
