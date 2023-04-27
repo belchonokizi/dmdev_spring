@@ -53,5 +53,5 @@ VALUES ((SELECT id FROM users WHERE username = 'ivan@gmail.com'), (SELECT id FRO
 select
     *
 from
-    company;
+    users;
 
