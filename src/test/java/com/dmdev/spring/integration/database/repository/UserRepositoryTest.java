@@ -31,7 +31,7 @@ class UserRepositoryTest {
              null,  "%ov%", LocalDate.now()
         );
         List<User> users = userRepository.findAllByFilter(filter);
-        System.out.println();
+        assertThat(users).hasSize(4);
 
     }
 
