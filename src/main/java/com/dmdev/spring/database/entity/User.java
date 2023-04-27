@@ -1,6 +1,9 @@
 package com.dmdev.spring.database.entity;
 
 import lombok.*;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
+import org.hibernate.envers.RelationTargetAuditMode;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -17,6 +20,8 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "users")
+//без аудитинга зависимых сущностей
+@Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
 public class User extends AuditingEntity<Long> {
 
     @Id
@@ -39,6 +44,8 @@ public class User extends AuditingEntity<Long> {
     @JoinColumn(name = "company_id")
     private Company company;
 
+    //в случае коллекций проставляется явно
+    @NotAudited
     @Builder.Default
     @OneToMany(mappedBy = "user")
     private List<UserChat> userChats = new ArrayList<>();

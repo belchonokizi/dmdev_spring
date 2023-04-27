@@ -50,8 +50,17 @@ VALUES ((SELECT id FROM users WHERE username = 'ivan@gmail.com'), (SELECT id FRO
        ((SELECT id FROM users WHERE username = 'petr@gmail.com'), (SELECT id FROM chat WHERE chat_name = 'database')),
        ((SELECT id FROM users WHERE username = 'kate@gmail.com'), (SELECT id FROM chat WHERE chat_name = 'database'));
 
+select *
+from
+    users_aud ua;
+
 select
     *
 from
     users;
+
+select
+    *
+from
+    revision;
 
