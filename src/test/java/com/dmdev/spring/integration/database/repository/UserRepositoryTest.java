@@ -6,14 +6,12 @@ import com.dmdev.spring.database.repository.UserRepository;
 import com.dmdev.spring.dto.PersonalInfo;
 import com.dmdev.spring.dto.PersonalInfo2;
 import com.dmdev.spring.dto.UserFilter;
-import com.dmdev.spring.integration.annotation.IT;
+import com.dmdev.spring.integration.IntegrationTestBase;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.test.annotation.Commit;
-import org.springframework.test.context.jdbc.Sql;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -22,11 +20,8 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
-@IT
-//указываем скрипты, которые надо накатить на тестовую базу
-@Sql({"classpath:sql/data.sql"})
 @RequiredArgsConstructor
-class UserRepositoryTest {
+class UserRepositoryTest extends IntegrationTestBase {
 
     private final UserRepository userRepository;
 
@@ -44,7 +39,6 @@ class UserRepositoryTest {
     }
 
     @Test
-    @Commit
     void checkAuditing() {
         User ivan = userRepository.findById(1L).get();
         ivan.setBirthDate(ivan.getBirthDate().plusYears(1L));

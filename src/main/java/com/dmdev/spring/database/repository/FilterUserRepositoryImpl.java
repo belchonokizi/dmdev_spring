@@ -2,8 +2,11 @@ package com.dmdev.spring.database.repository;
 
 import com.dmdev.spring.database.entity.Role;
 import com.dmdev.spring.database.entity.User;
+import com.dmdev.spring.database.querydsl.QPredicates;
 import com.dmdev.spring.dto.PersonalInfo;
 import com.dmdev.spring.dto.UserFilter;
+import com.querydsl.core.types.Predicate;
+import com.querydsl.jpa.impl.JPAQuery;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -12,6 +15,8 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Map;
+
+import static com.dmdev.spring.database.entity.QUser.user;
 
 @RequiredArgsConstructor
 public class FilterUserRepositoryImpl implements FilterUserRepository {
@@ -47,18 +52,17 @@ public class FilterUserRepositoryImpl implements FilterUserRepository {
     @Override
     public List<User> findAllByFilter(UserFilter userFilter) {
         //динамический where
-//        Predicate predicate = QPredicates.builder()
-//                .add(userFilter.firstname(), user.firstname::containsIgnoreCase)
-//                .add(userFilter.lastname(), user.lastname::containsIgnoreCase)
-//                .add(userFilter.birthDate(), user.birthDate::before)
-//                .build();
-//
-//        return new JPAQuery<User>(entityManager)
-//                .select(user)
-//                .from(user)
-//                .where(predicate)
-//                .fetch();
-        return null;
+        Predicate predicate = QPredicates.builder()
+                .add(userFilter.firstname(), user.firstname::containsIgnoreCase)
+                .add(userFilter.lastname(), user.lastname::containsIgnoreCase)
+                .add(userFilter.birthDate(), user.birthDate::before)
+                .build();
+
+        return new JPAQuery<User>(entityManager)
+                .select(user)
+                .from(user)
+                .where(predicate)
+                .fetch();
     }
 
     @Override
