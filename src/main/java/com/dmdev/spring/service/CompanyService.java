@@ -1,6 +1,5 @@
 package com.dmdev.spring.service;
 
-import com.dmdev.spring.database.entity.Company;
 import com.dmdev.spring.database.repository.CompanyRepository;
 import com.dmdev.spring.dto.CompanyReadDto;
 import com.dmdev.spring.listener.entity.AccessType;
@@ -28,7 +27,7 @@ public class CompanyService {
                 .map(entity -> {
                     //отправляем ивент
                     eventPublisher.publishEvent(new EntityEvent(entity, AccessType.READ));
-                    return new CompanyReadDto(entity.getId());
+                    return new CompanyReadDto(entity.getId(), null);
                 });
     }
 }
