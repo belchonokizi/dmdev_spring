@@ -38,3 +38,5 @@ spring:
       show_sql: true
       format_sql: true
       hbm2ddl.auto: validate
+    #чтобы транзакции не открывались на уровне контроллеров
+    open-in-view: false
