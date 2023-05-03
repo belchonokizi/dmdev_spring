@@ -1,6 +1,5 @@
 package com.dmdev.spring.integration.http.controller;
 
-import com.dmdev.spring.dto.UserCreateEditDto;
 import com.dmdev.spring.integration.IntegrationTestBase;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
@@ -32,12 +31,14 @@ class UserControllerTest extends IntegrationTestBase {
     @Test
     void create() throws Exception {
         mockMvc.perform(post("/users")
-                        .param(username, "test@gamil.com")
+                        .param(username, "test@gmail.com")
                         .param(firstname, "Test")
                         .param(lastname, "TestTest")
                         .param(role, "ADMIN")
-                        .param(companyId, "1"))
+                        .param(companyId, "1")
+                        .param(birthDate, "2000-01-01")
+                )
                 .andExpectAll(status().is3xxRedirection(),
-                        redirectedUrlPattern("/users/{\\d}"));
+                        redirectedUrlPattern("/users/{\\d+}"));
     }
 }
