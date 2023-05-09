@@ -66,5 +66,5 @@ from
 select
     *
 from
-    revision;
+    company;
 
