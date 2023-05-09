@@ -9,6 +9,7 @@
     так как запрос перенаправляется на update-->
     <form th:action="@{/users/{userId}/update(userId=${user.id})}" method="post" th:object="${user}">
         <label for="username">Username:
+            <!--Внутри формочек указываем актульальные значения через *{username}-->
             <input id="username" type="text" name="username" th:value="*{username}">
         </label><br>
         <label for="birthDate">BirthDate:
@@ -20,11 +21,13 @@
         <label for="firstname">Firstname:
             <input id="firstname" type="text" name="firstname" th:value="*{firstname}">
         </label><br>
+        <!--Изначально радио выбрано на актуальном значении роли через th:checked-->
         <div th:each="role : ${roles}">
             <input th:id="${role}" type="radio" name="role" th:value="${role}" th:checked="${role == user.role}">
             <label th:for="${role}" th:text="${role}">Role name</label>
         </div>
         <div>
+            <!--Изначально значение выбрано на актуальном через th:selected-->
             <label for="company">Company:
                 <select id="company" name="companyId">
                 <option th:each="company : ${companies}"
@@ -36,6 +39,7 @@
         </div>
         <button type="submit">Update</button>
     </form>
+<!--Кнопка с удалением только для админов-->
     <form th:action="@{/users/{userId}/delete(userId=${user.id})}" th:if="${user.role.name() == 'ADMIN'}" method="post">
         <button type="submit">Remove</button>
     </form>
