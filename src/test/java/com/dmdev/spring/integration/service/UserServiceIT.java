@@ -52,7 +52,7 @@ public class UserServiceIT extends IntegrationTestBase {
         assertEquals(userDto.getBirthDate(), actual.getBirthDate());
         assertEquals(userDto.getLastname(), actual.getLastname());
         assertSame(userDto.getRole(), actual.getRole());
-        assertEquals(userDto.getCompanyId(), actual.getCompany().id());
+        assertEquals(userDto.getCompanyId(), actual.getCompany().getId());
     }
 
     @Test
@@ -73,7 +73,7 @@ public class UserServiceIT extends IntegrationTestBase {
             assertEquals(userDto.getBirthDate(), actualUser.getBirthDate());
             assertEquals(userDto.getLastname(), actualUser.getLastname());
             assertSame(userDto.getRole(), actualUser.getRole());
-            assertEquals(userDto.getCompanyId(), actualUser.getCompany().id());
+            assertEquals(userDto.getCompanyId(), actualUser.getCompany().getId());
         });
     }
 
